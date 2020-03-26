@@ -1,0 +1,173 @@
+﻿<Window x:Class="pizza.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pizza"
+        mc:Ignorable="d"
+        Title="Pizzeria" Height="768" Width="1024" MaxHeight="768" MaxWidth="1024" MinHeight="768" MinWidth="1024" Background="Peru">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Source="Images/logo.png" Grid.RowSpan="2"/>
+        <Label Grid.Row="0" Grid.Column="1" Margin="300, 0, 0, 0" Name="Sum" Content="Razem: " FontSize="20" FontWeight="Bold" Foreground="Sienna" Width="292"/>
+        <Label Grid.Row="1" Margin="0,73,0,83" FontSize="30" FontWeight="Bold" Foreground="Sienna" Content="Wybierz pizzę:" Grid.ColumnSpan="2" Grid.RowSpan="3"></Label>
+        <Border Name="BorderPizza" BorderThickness="10" BorderBrush="Sienna" Grid.Row="2" Grid.RowSpan="3" Margin="0,50,350,-50">
+            <ListBox x:Name="pizzaListBox" FontSize="20" Background="Peru" PreviewMouseDown="OnListBoxItemClick">
+                <ListBoxItem>Pepperoni</ListBoxItem>
+                <ListBoxItem>Margherita</ListBoxItem>
+                <ListBoxItem>Hawajska</ListBoxItem>
+                <ListBoxItem>Americana</ListBoxItem>
+                <ListBoxItem>Texas</ListBoxItem>
+                <ListBoxItem>Princesa</ListBoxItem>
+                <ListBoxItem>Vege</ListBoxItem>
+            </ListBox>
+        </Border>
+        <Label Grid.Column="0" Name="Skladniki" Grid.Row="6" FontSize="20" FontWeight="Bold" Margin="0, -30, 0, 0" Content="Składniki pizzy:"></Label>
+        <Label Grid.Column="0" Grid.Row="6" Margin="0,61,0,22"  Content="Wybierz rozmiar:" FontSize="30" FontWeight="Bold" Foreground="Sienna" Grid.RowSpan="2"></Label>
+        <Border Grid.Row="7" Grid.Column="0" Grid.RowSpan="2" BorderThickness="10" BorderBrush="Sienna" Margin="0, 30, 250, 35">
+            <StackPanel Name="SizePanel">
+                <RadioButton IsChecked="True"  Content="Mega 30 cm - 24,90 zł" Margin="0, 5, 0, 5" Checked="SizeChecked">
+                    <RadioButton.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+                <RadioButton Content="XXL 45 cm - 35,90 zł" Margin="0, 5, 0, 5" Checked="SizeChecked">
+                    <RadioButton.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+                <RadioButton Content="GIGA 60 cm - 42,90 zł" Margin="0, 5, 0, 5" Checked="SizeChecked">
+                    <RadioButton.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+            </StackPanel>
+        </Border>
+        <Label Grid.Row="1" Grid.Column="0" Margin="300,73,0,83" FontSize="30" FontWeight="Bold" Foreground="Sienna" Content="Wybierz sos na pizzę:" Grid.ColumnSpan="2" Grid.RowSpan="3"></Label>
+        <Border Grid.Row="3" Grid.Column="0" Grid.RowSpan="2" BorderThickness="10" BorderBrush="Sienna" Margin="300, -30, 0, 95">
+            <StackPanel Name="SaucePanel">
+                <RadioButton IsChecked="True" Content="Pomidorowy" Margin="0, 5, 0, 5" Checked="SauceChecked">
+                    <RadioButton.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+                <RadioButton Content="Biały" Margin="0, 5, 0, 5" Checked="SauceChecked">
+                    <RadioButton.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+                <RadioButton Content="BBQ" Margin="0, 5, 0, 5" Checked="SauceChecked">
+                    <RadioButton.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+            </StackPanel>
+        </Border>
+        <Label Grid.Row="3" Grid.Column="0" Margin="300,85,0,0" FontSize="30" FontWeight="Bold" Foreground="Sienna" Content="Dobierz składniki:" Grid.ColumnSpan="2" Grid.RowSpan="3"></Label>
+        <Border Grid.Row="5" Grid.Column="0" Grid.RowSpan="4" BorderThickness="10" BorderBrush="Sienna" Margin="300, -30, -70, 15">
+            <StackPanel Name="AddonsPanel">
+                <CheckBox Content="Extra sos BBQ + 3 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Content="Extra sos pomidorowy + 3 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Content="Extra sos biały + 3 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Content="Ser feta + 5 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Content="Boczek + 5 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Content="Jajko + 5 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Content="Pieczarki + 5 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Content="Szynka + 5 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Content="Oliwki + 5 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Content="Pomidory + 5 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <CheckBox Content="Ananas + 5 zł" Margin="0, 7, 0, 7" Checked="OnAddonChecked" Unchecked="OnAddonUncheck">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"></ScaleTransform>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+            </StackPanel>
+        </Border>
+        <Label Grid.Column="1" Grid.Row="1" Margin="175, 73, 0, -83"  Content="Adres dostawy:" FontSize="30" FontWeight="Bold" Foreground="Sienna"></Label>
+        <Border Grid.Column="1" Grid.Row="2" BorderThickness="10" BorderBrush="Sienna" Margin="120,42,25,70" Grid.RowSpan="3">
+            <WrapPanel>
+                <Label Content="Miasto:" FontSize="20" FontWeight="Bold" Foreground="Sienna"></Label>
+                <TextBox Name="City" FontSize="23" Width="242"/>
+                <Label Margin="0,0,18,0" Content="Ulica:" FontSize="20" FontWeight="Bold" Foreground="Sienna"></Label>
+                <TextBox Name="Street" FontSize="23" Width="242"/>
+                <Label Content="Nr domu:" FontSize="20" FontWeight="Bold" Foreground="Sienna"></Label>
+                <TextBox Name="HouseNumber" FontSize="22" Width="45"/>
+                <Label Content="Nr mieszkania:" FontSize="20" FontWeight="Bold" Foreground="Sienna"></Label>
+                <TextBox Name="FlatNumber" FontSize="22" Width="45" PreviewTextInput="NumberValidation"/>
+            </WrapPanel>
+        </Border>
+        <Label Grid.Column="1" Grid.Row="4" Margin="175,8,0,25"  Content="Podsumowanie:" FontSize="30" FontWeight="Bold" Foreground="Sienna"></Label>
+        <Border Grid.Row="5" Grid.Column="1" Grid.RowSpan="4" BorderThickness="10" BorderBrush="Sienna" Margin="150, -30, 50, 70">
+            <WrapPanel>
+                <Label Content="Wybrana pizza:" FontSize="20" FontWeight="Bold" Foreground="Sienna"></Label>
+                <Label Name="ChozenPizza" Content="" FontSize="20" Foreground="Sienna"></Label>
+                <Label Content="Wybrany rozmiar:" FontSize="20" FontWeight="Bold" Foreground="Sienna"></Label>
+                <Label Name="ChosenSize" Content="" FontSize="20" Foreground="Sienna"></Label>
+                <Label Content="Wybrany sos:" FontSize="20" FontWeight="Bold" Foreground="Sienna"></Label>
+                <Label Name="ChozenSauce" Content="" FontSize="20" Foreground="Sienna"></Label>
+                <Label Content="Wybrane dodatki:" FontSize="20" FontWeight="Bold" Foreground="Sienna" Width="292"/>
+                <WrapPanel>
+                    <Label Name="ChozenAddons" Content="Brak" FontSize="20" Foreground="Sienna"></Label>
+                </WrapPanel>
+
+            </WrapPanel>
+        </Border>
+        <Button Grid.Column="1" Grid.Row="8" Margin="200, 30, 100, 10" Content="Zamawiam!" FontWeight="Bold" FontSize="20" Background="Sienna" Foreground="Peru" Click="OnOrderClick"></Button>
+    </Grid>
+</Window>
